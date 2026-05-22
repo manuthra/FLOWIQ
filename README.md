@@ -75,4 +75,5 @@ CSE Student • AI & Product Analytics Enthusiast
 - Session replay integration
 - AI-generated retention scoring
 
+Live Demo: https://manuthra-flowiq-app-g4h6rk.streamlit.app/
 
