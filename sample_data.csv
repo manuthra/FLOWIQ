@@ -1,0 +1,9 @@
+user_id,step,timestamp,completed
+U001,Landing Page,2024-01-01,true
+U001,Signup Form,2024-01-01,true
+U001,OTP Verify,2024-01-01,false
+U002,Landing Page,2024-01-01,true
+U002,Signup Form,2024-01-01,true
+U002,OTP Verify,2024-01-01,true
+U002,Profile Setup,2024-01-01,true
+U002,First Feature,2024-01-01,false
