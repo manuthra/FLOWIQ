@@ -320,7 +320,7 @@ html, body, [class*="css"] {
 
 .h1 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: clamp(70px, 7.8vw, 118px);
+    font-size: clamp(32px, 5vw, 56px);
     line-height: 0.92;
     letter-spacing: 2px;
     color: var(--white);
@@ -1060,7 +1060,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 
 .h1 {
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(60px,7.8vw,110px);line-height:.92;
+  font-size:clamp(28px, 4vw, 48px);line-height:.92;
   letter-spacing:2px;color:#f0f6ff;margin-bottom:36px;
   opacity:0;animation:up .7s .2s ease forwards;
 }
