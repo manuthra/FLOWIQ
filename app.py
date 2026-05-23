@@ -1334,4 +1334,207 @@ else:
   <div class="empty-ring"><div class="empty-inner">IQ</div></div>
   <div class="empty-h">AWAITING DATA</div>
   <div class="empty-p">Upload a CSV or enable sample dataset above</div>
+                
+
+
+# ─────────────────────────────────────────
+      COHORT ANALYSIS
+# ─────────────────────────────────────────
+st.markdown('<div class="s-head"><span class="s-num">04</span><span class="s-name">Cohort Analysis</span></div>', unsafe_allow_html=True)
+
+if cohort is not None and not cohort.empty:
+
+    # Cohort Bar Chart
+    st.markdown('<div class="cc"><div class="cc-head"><span class="cc-title">Users by Week</span><span class="cc-badge">COHORT / WEEK</span></div>', unsafe_allow_html=True)
+
+    cohort_fig = go.Figure(go.Bar(
+        x=[f"Week {w}" for w in cohort['Week']],
+        y=cohort['Users'],
+        marker=dict(
+            color=cohort['Users'],
+            colorscale=[[0, "#00573f"], [0.5, "#00f5c4"], [1, "#00f5c4"]],
+            line=dict(color=BG, width=1.5)
+        ),
+        text=cohort['Users'],
+        textposition="outside",
+        textfont=dict(family="Fira Code", color=WHT, size=11)
+    ))
+    cohort_fig.update_layout(
+        paper_bgcolor="rgba(0,0,0,0)",
+        plot_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=10, r=10, t=10, b=10),
+        height=320,
+        xaxis=dict(gridcolor=GRID, tickfont=dict(family="Fira Code", color=MUT, size=11), linecolor=GRID),
+        yaxis=dict(gridcolor=GRID, tickfont=dict(family="Fira Code", color=MUT, size=11), linecolor=GRID)
+    )
+    st.plotly_chart(cohort_fig, use_container_width=True)
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Cohort Table
+    st.markdown('<div class="cc"><div class="cc-head"><span class="cc-title">Cohort Breakdown</span><span class="cc-badge">WEEKLY DATA</span></div>', unsafe_allow_html=True)
+
+    # Header row
+    st.markdown("""
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; background:rgba(0,0,0,0.3);
+        padding:12px 24px; border-bottom:1px solid #1e2d45;">
+        <span style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+            text-transform:uppercase; color:#8892a4;">WEEK</span>
+        <span style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+            text-transform:uppercase; color:#8892a4;">USERS</span>
+        <span style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+            text-transform:uppercase; color:#8892a4;">SHARE</span>
+    </div>
+    """, unsafe_allow_html=True)
+
+    total_cohort_users = cohort['Users'].sum()
+    for _, row in cohort.iterrows():
+        share = round((row['Users'] / total_cohort_users) * 100, 1) if total_cohort_users > 0 else 0
+        bar_width = int(share)
+        st.markdown(f"""
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr;
+            padding:14px 24px; border-bottom:1px solid #1e2d45;
+            transition: background 0.2s;"
+            onmouseover="this.style.background='#111827'"
+            onmouseout="this.style.background='transparent'">
+            <span style="font-family:'Fira Code',monospace; font-size:12px;
+                color:#00f5c4; letter-spacing:1px;">Week {int(row['Week'])}</span>
+            <span style="font-family:'Bebas Neue',sans-serif; font-size:22px;
+                color:#f0f6ff; letter-spacing:1px;">{int(row['Users'])}</span>
+            <div style="display:flex; align-items:center; gap:10px;">
+                <div style="flex:1; height:4px; background:#1e2d45; border-radius:2px;">
+                    <div style="width:{bar_width}%; height:100%; background:#00f5c4;
+                        box-shadow:0 0 8px rgba(0,245,196,0.4); border-radius:2px;"></div>
+                </div>
+                <span style="font-family:'Fira Code',monospace; font-size:10px;
+                    color:#8892a4; white-space:nowrap;">{share}%</span>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+else:
+    st.markdown("""
+    <div style="padding:40px; text-align:center; font-family:'Fira Code',monospace;
+        font-size:11px; letter-spacing:2px; color:#8892a4; border:1px solid #1e2d45;">
+        NO COHORT DATA AVAILABLE — ADD TIMESTAMP COLUMN TO CSV
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown("<br>", unsafe_allow_html=True)
+
+
+# ─────────────────────────────────────────
+              REPORTS
+# ─────────────────────────────────────────
+st.markdown('<div class="s-head"><span class="s-num">05</span><span class="s-name">Reports</span></div>', unsafe_allow_html=True)
+
+# Summary cards row
+st.markdown(f"""
+<div style="display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    border:1px solid #1e2d45; margin-bottom:2px;">
+
+  <div style="background:#0c1120; padding:28px 24px; border-right:1px solid #1e2d45;">
+    <div style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+        text-transform:uppercase; color:#8892a4; margin-bottom:10px;">Conversion Rate</div>
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:48px; line-height:1;
+        color:#00f5c4; text-shadow:0 0 22px rgba(0,245,196,0.35);">
+        {round((completed_users / total_users * 100) if total_users > 0 else 0)}%
+    </div>
+    <div style="font-family:'Fira Code',monospace; font-size:10px; color:#8892a4;
+        margin-top:8px;">of users completed all steps</div>
+  </div>
+
+  <div style="background:#0c1120; padding:28px 24px; border-right:1px solid #1e2d45;">
+    <div style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+        text-transform:uppercase; color:#8892a4; margin-bottom:10px;">Critical Step</div>
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:32px; line-height:1;
+        color:#ff3d6b; text-shadow:0 0 22px rgba(255,61,107,0.35); margin-top:8px;">
+        {worst_name}
+    </div>
+    <div style="font-family:'Fira Code',monospace; font-size:10px; color:#8892a4;
+        margin-top:8px;">highest drop-off point</div>
+  </div>
+
+  <div style="background:#0c1120; padding:28px 24px;">
+    <div style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+        text-transform:uppercase; color:#8892a4; margin-bottom:10px;">Avg Drop Rate</div>
+    <div style="font-family:'Bebas Neue',sans-serif; font-size:48px; line-height:1;
+        color:#ffc94d; text-shadow:0 0 22px rgba(255,201,77,0.35);">
+        {round(avg_drop)}%
+    </div>
+    <div style="font-family:'Fira Code',monospace; font-size:10px; color:#8892a4;
+        margin-top:8px;">across all funnel steps</div>
+  </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+# Retention insight from AI
+if insights and insights.get('retention_insight'):
+    st.markdown(f"""
+    <div style="background:linear-gradient(135deg,#111827,rgba(0,245,196,0.04));
+        border:1px solid #1e2d45; border-left:3px solid #ffc94d;
+        padding:28px 36px; margin-bottom:2px;">
+        <div style="font-family:'Fira Code',monospace; font-size:9px; letter-spacing:3px;
+            text-transform:uppercase; color:#ffc94d; margin-bottom:12px;
+            display:flex; align-items:center; gap:10px;">
+            <span style="width:18px;height:1.5px;background:#ffc94d;display:inline-block;"></span>
+            AI Retention Insight
+        </div>
+        <div style="font-size:17px; font-weight:500; color:#f0f6ff; line-height:1.6;">
+            {insights.get('retention_insight')}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Funnel step by step report
+st.markdown("""
+<div style="background:rgba(0,0,0,0.2); padding:13px 18px;
+    border:1px solid #1e2d45; border-bottom:none;
+    display:flex; justify-content:space-between; align-items:center;">
+    <span style="font-family:'Fira Code',monospace; font-size:11px;
+        letter-spacing:2px; text-transform:uppercase; color:#ccd6f6;">Step-by-Step Report</span>
+    <span style="font-family:'Fira Code',monospace; font-size:9px; padding:3px 9px;
+        border:1px solid #00f5c4; color:#00f5c4; letter-spacing:1px;">FULL BREAKDOWN</span>
+</div>
+""", unsafe_allow_html=True)
+
+for i, step in enumerate(funnel):
+    health_color = "#00f5c4" if step['drop_rate'] < 30 else "#ffc94d" if step['drop_rate'] < 60 else "#ff3d6b"
+    health_label = "HEALTHY" if step['drop_rate'] < 30 else "WARNING" if step['drop_rate'] < 60 else "CRITICAL"
+    st.markdown(f"""
+    <div style="display:grid; grid-template-columns:40px 1fr auto auto;
+        align-items:center; gap:20px; padding:18px 24px;
+        border:1px solid #1e2d45; border-top:none;
+        background:#0c1120; transition:background 0.2s;">
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:28px;
+            color:#1e2d45; letter-spacing:1px;">0{i+1}</div>
+        <div>
+            <div style="font-family:'Fira Code',monospace; font-size:11px;
+                letter-spacing:2px; color:#00f5c4; margin-bottom:4px;">{step['step']}</div>
+            <div style="font-size:13px; color:#8892a4;">
+                {step['users']} users entered · {step['completed']} completed
+            </div>
+        </div>
+        <div style="font-family:'Bebas Neue',sans-serif; font-size:32px;
+            color:{health_color}; text-align:right;">{step['drop_rate']}%</div>
+        <div style="font-family:'Fira Code',monospace; font-size:9px;
+            padding:4px 10px; border:1px solid {health_color};
+            color:{health_color}; letter-spacing:1px;">{health_label}</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+# Export button
+report_df = pd.DataFrame(funnel)
+csv_export = report_df.to_csv(index=False)
+st.markdown("<br>", unsafe_allow_html=True)
+st.download_button(
+    label="⬇  Export Report as CSV",
+    data=csv_export,
+    file_name="flowiq_report.csv",
+    mime="text/csv"
+)              
 </div>""", unsafe_allow_html=True)
