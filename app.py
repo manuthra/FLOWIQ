@@ -765,8 +765,8 @@ div[data-testid="stFileUploader"] button:hover {
     border: 1px solid var(--border);
     border-top: none;
     padding: 20px 28px;
-    display: grid;
-    grid-template-columns: 130px 1fr auto;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
     transition: background 0.2s, border-color 0.2s;
