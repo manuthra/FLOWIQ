@@ -1312,7 +1312,10 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 st.markdown('<div class="upload-strip">', unsafe_allow_html=True)
 st.markdown('<div class="us-head">— Data Input</div>', unsafe_allow_html=True)
 
-c1, c2, c3 = st.columns([1, 2, 1])
+c1 = st.container()
+c2 = st.container()
+c3 = st.container()
+
 with c2:
     uploaded_file = st.file_uploader("Drop CSV here", type=["csv"])
     sample = st.checkbox("↳ use sample dataset instead", value=False if uploaded_file else True)
@@ -1361,7 +1364,7 @@ if is_valid_data and df is not None:
 
     st.markdown('<div class="s-head"><span class="s-num">01</span><span class="s-name">Overview Metrics</span></div>', unsafe_allow_html=True)
 
-    m1,m2,m3,m4 = st.columns(4)
+    m1 = st.container(); m2 = st.container(); m3 = st.container(); m4 = st.container()
     with m1:
         st.markdown(f'<div class="mc"><div class="mc-lbl">Total Users</div><div class="mc-val neon">{total_users}</div><div class="mc-bar"></div></div>', unsafe_allow_html=True)
     with m2:
@@ -1377,7 +1380,7 @@ if is_valid_data and df is not None:
 
     BG="#060914"; GRID="#1e2d45"; NEON="#00f5c4"; HOT="#ff3d6b"; MUT="#8892a4"; WHT="#f0f6ff"
 
-    cl, cr = st.columns(2)
+    cl = st.container(); cr = st.container()
     with cl:
         st.markdown('<div class="cc"><div class="cc-head"><span class="cc-title">Conversion Funnel</span><span class="cc-badge">USERS / STEP</span></div>', unsafe_allow_html=True)
         ff = go.Figure(go.Funnel(
