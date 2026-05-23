@@ -923,20 +923,18 @@ components.html("""
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-body{margin:0;padding:0;background:#060914;overflow:hidden;}
+body{margin:0;padding:0;background:#060914;overflow-x:hidden;}
 
 .hero {
   display: flex;
   flex-direction: column;
   height: auto;
-  min-height: 420px;             
+  min-height: 420px;
   border-bottom: 1px solid #1e2d45;
   position: relative;
   overflow: hidden;
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
-.hero-r { display: none; }
-.hero-l { padding: 40px 24px; border-right: none; }                
 
 #hero-canvas {
   position: absolute;
@@ -1011,106 +1009,70 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 .corner-bl{bottom:20px;left:20px;border-bottom:1.5px solid rgba(0,245,196,.55);border-left:1.5px solid rgba(0,245,196,.55)}
 .corner-br{bottom:20px;right:20px;border-bottom:1.5px solid rgba(0,245,196,.55);border-right:1.5px solid rgba(0,245,196,.55)}
 
-/* HERO LEFT */
 .hero-l {
-  padding: 80px 64px 72px;
-  border-right: 1px solid #1e2d45;
-  display: flex; flex-direction: column; justify-content: center;
-  position: relative; overflow: hidden; z-index: 10;
+  padding: 40px 24px 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  width: 100%;
 }
+
 .hero-l::before {
   content:''; position:absolute;
-  width:700px;height:700px;border-radius:50%;
+  width:500px;height:500px;border-radius:50%;
   background:radial-gradient(circle,rgba(0,245,196,.09) 0%,transparent 65%);
-  top:-200px;left:-180px;pointer-events:none;
+  top:-150px;left:-100px;pointer-events:none;
   animation:orb-drift 9s ease-in-out infinite alternate;
 }
-@keyframes orb-drift{from{transform:translate(0,0)}to{transform:translate(60px,40px)}}
-.hero-l::after {
-  content:'';position:absolute;
-  width:400px;height:400px;border-radius:50%;
-  background:radial-gradient(circle,rgba(255,61,107,.06) 0%,transparent 65%);
-  bottom:-100px;right:0;pointer-events:none;
-  animation:orb-drift2 13s ease-in-out infinite alternate;
-}
-@keyframes orb-drift2{from{transform:translate(0,0)}to{transform:translate(-40px,-30px)}}
+@keyframes orb-drift{from{transform:translate(0,0)}to{transform:translate(40px,30px)}}
 
 .h-eyebrow {
-  display:inline-flex;align-items:center;gap:12px;
-  font-family:'Fira Code',monospace;font-size:11px;
-  letter-spacing:3px;text-transform:uppercase;color:#00f5c4;
-  margin-bottom:36px;opacity:0;animation:up .6s .1s ease forwards;
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:'Fira Code',monospace;font-size:10px;
+  letter-spacing:2px;text-transform:uppercase;color:#00f5c4;
+  margin-bottom:20px;opacity:0;animation:up .6s .1s ease forwards;
 }
-.h-eyebrow::before{content:'';width:30px;height:1.5px;background:#00f5c4;box-shadow:0 0 8px #00f5c4}
+.h-eyebrow::before{content:'';width:20px;height:1.5px;background:#00f5c4;box-shadow:0 0 8px #00f5c4}
 
 .h1 {
   font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(28px, 4vw, 48px);line-height:.92;
-  letter-spacing:2px;color:#f0f6ff;margin-bottom:36px;
+  font-size:42px;
+  line-height:.95;
+  letter-spacing:2px;color:#f0f6ff;margin-bottom:20px;
   opacity:0;animation:up .7s .2s ease forwards;
 }
+
 .h1-accent {
   color:#00f5c4;
-  text-shadow:0 0 50px rgba(0,245,196,.35),0 0 100px rgba(0,245,196,.1);
+  text-shadow:0 0 50px rgba(0,245,196,.35);
   display:inline-block;position:relative;
 }
-.h1-accent::before,.h1-accent::after{content:attr(data-t);position:absolute;inset:0;opacity:0}
-.h1-accent::before{color:#ff3d6b;text-shadow:none;animation:ga 6s 4s step-end infinite}
-.h1-accent::after{color:#ffc94d;text-shadow:none;animation:gb 6s 4s step-end infinite}
-@keyframes ga{0%,88%,91%,100%{opacity:0;transform:translate(0)}89%{opacity:.8;transform:translate(-4px,1px);clip-path:polygon(0 25%,100% 25%,100% 55%,0 55%)}}
-@keyframes gb{0%,88%,92%,100%{opacity:0;transform:translate(0)}90%{opacity:.6;transform:translate(4px,-2px);clip-path:polygon(0 60%,100% 60%,100% 78%,0 78%)}}
 
 .h-body {
-  font-size:17px;font-weight:400;line-height:1.8;color:#8892a4;
-  max-width:460px;margin-bottom:52px;
-  opacity:0;animation:up .7s .35s ease forwards;
+  font-size:14px;
+  font-weight:400;
+  line-height:1.7;
+  color:#8892a4;
+  max-width:100%;
+  margin-bottom:28px;
+  opacity:0;
+  animation:up .7s .35s ease forwards;
 }
 .h-body strong{color:#ccd6f6;font-weight:600}
 
 .h-cta {
-  display:inline-flex;align-items:center;gap:12px;
+  display:inline-flex;align-items:center;gap:10px;
   background:#00f5c4;color:#060914;
   font-family:'Plus Jakarta Sans',sans-serif;
-  font-size:13px;font-weight:700;letter-spacing:1px;padding:15px 32px;
-  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
+  font-size:12px;font-weight:700;letter-spacing:1px;padding:12px 24px;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));
   transition:all .2s;cursor:default;
   opacity:0;animation:up .7s .5s ease forwards;
+  align-self: flex-start;
 }
-.h-cta:hover{box-shadow:0 0 40px rgba(0,245,196,.35);letter-spacing:2px}
-
-/* HERO RIGHT */
-.hero-r {
-  display:none;
-}
-.hero-r::before {
-  content:'';position:absolute;inset:0;
-  background-image:linear-gradient(#1e2d45 1px,transparent 1px),linear-gradient(90deg,#1e2d45 1px,transparent 1px);
-  background-size:44px 44px;opacity:.35;pointer-events:none;
-}
-.hr-block {
-  padding-bottom:28px;margin-bottom:28px;
-  border-bottom:1px solid #1e2d45;
-  position:relative;opacity:0;animation:up .6s ease forwards;
-}
-.hr-block:last-child{border-bottom:none;padding-bottom:0;margin-bottom:0}
-.hr-block:nth-child(1){animation-delay:.3s}
-.hr-block:nth-child(2){animation-delay:.42s}
-.hr-block:nth-child(3){animation-delay:.54s}
-.hr-block:nth-child(4){animation-delay:.66s}
-
-.hr-lbl{font-family:'Fira Code',monospace;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:#8892a4;margin-bottom:8px}
-.hr-val{font-family:'Bebas Neue',sans-serif;font-size:56px;line-height:1;letter-spacing:2px;color:#f0f6ff}
-.hr-val.neon{color:#00f5c4;text-shadow:0 0 30px rgba(0,245,196,.35)}
-
-.terminal{
-  background:rgba(0,0,0,.5);
-  border:1px solid #1e2d45;border-left:2px solid #00f5c4;
-  padding:18px 20px;margin-top:auto;
-}
-.tl{font-family:'Fira Code',monospace;font-size:11px;line-height:2;color:#8892a4}
-.tl .cmd{color:#00f5c4} .tl .res{color:#ffc94d}
-.cur{display:inline-block;width:7px;height:14px;background:#00f5c4;vertical-align:middle;margin-left:2px;animation:cur-blink 1s step-end infinite}
-@keyframes cur-blink{0%,100%{opacity:1}50%{opacity:0}}
 
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 </style>
@@ -1137,36 +1099,13 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
     <div class="h-eyebrow">⚡ Behavioral Flow Analyzer</div>
     <div class="h1">
       Every drop-off<br>costs you.<br>
-      <span class="h1-accent" data-t="Fix it now.">Fix it now.</span>
+      <span class="h1-accent">Fix it now.</span>
     </div>
     <div class="h-body">
       Upload session data and let AI pinpoint exactly <strong>where users drop off</strong>
       — with specific, prioritised fixes you can ship today.
     </div>
     <div class="h-cta">↓ &nbsp;Upload CSV below</div>
-  </div>
-
-  <div class="hero-r">
-    <div class="hr-block">
-      <div class="hr-lbl">avg time to insight</div>
-      <div class="hr-val neon">&lt; 3s</div>
-    </div>
-    <div class="hr-block">
-      <div class="hr-lbl">AI model</div>
-      <div class="hr-val" style="font-size:30px;letter-spacing:3px;color:#8892a4;">INSIGHT ENGINE</div>
-    </div>
-    <div class="hr-block">
-      <div class="hr-lbl">analysis depth</div>
-      <div class="hr-val">DEEP</div>
-    </div>
-    <div class="hr-block">
-      <div class="terminal">
-        <div class="tl"><span class="cmd">$ flowiq</span> --run funnel.csv</div>
-        <div class="tl"><span class="res">→ scanning drop-off patterns</span></div>
-        <div class="tl"><span class="res">→ running AI inference</span></div>
-        <div class="tl">ready<span class="cur"></span></div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -1185,7 +1124,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
   const GOLD   = '#ffc94d';
   const COLORS = [NEON,NEON,NEON,HOT,GOLD];
 
-  const particles = Array.from({length:100},()=>({
+  const particles = Array.from({length:80},()=>({
     x:Math.random()*canvas.width, y:Math.random()*canvas.height,
     r:Math.random()*1.8+.3,
     vx:(Math.random()-.5)*.38, vy:(Math.random()-.5)*.38,
@@ -1193,7 +1132,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
     alpha:Math.random()*.55+.15, pulse:Math.random()*Math.PI*2
   }));
 
-  const nodes = Array.from({length:8},()=>({
+  const nodes = Array.from({length:6},()=>({
     x:Math.random()*canvas.width, y:Math.random()*canvas.height,
     r:Math.random()*5+4,
     vx:(Math.random()-.5)*.18, vy:(Math.random()-.5)*.18,
@@ -1211,8 +1150,6 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 
   function draw(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
-
-    /* binary rain */
     ctx.font='11px "Fira Code",monospace';
     rain.forEach((col,i)=>{
       col.y+=col.speed;
@@ -1224,8 +1161,6 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
         ctx.fillStyle=NEON; ctx.fillText(ch,i*COL_W+4,fy);
       });
     });
-
-    /* particles */
     particles.forEach(p=>{
       p.x+=p.vx; p.y+=p.vy; p.pulse+=.02;
       if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
@@ -1234,23 +1169,18 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
       ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
       ctx.fillStyle=p.color; ctx.fill();
     });
-
-    /* particle connections */
     ctx.lineWidth=.6; ctx.strokeStyle=NEON; ctx.setLineDash([]);
     for(let i=0;i<particles.length;i++){
       for(let j=i+1;j<particles.length;j++){
         const dx=particles[i].x-particles[j].x, dy=particles[i].y-particles[j].y;
         const d2=dx*dx+dy*dy;
-        if(d2<145*145){
-          const d=Math.sqrt(d2);
-          ctx.globalAlpha=(1-d/145)*.14;
+        if(d2<120*120){
+          ctx.globalAlpha=(1-Math.sqrt(d2)/120)*.14;
           ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
           ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke();
         }
       }
     }
-
-    /* data nodes */
     nodes.forEach(nd=>{
       nd.x+=nd.vx; nd.y+=nd.vy; nd.pulse+=.018;
       if(nd.x<0)nd.x=canvas.width; if(nd.x>canvas.width)nd.x=0;
@@ -1265,20 +1195,6 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
       ctx.beginPath(); ctx.arc(nd.x,nd.y,pr,0,Math.PI*2);
       ctx.fillStyle=NEON; ctx.fill();
     });
-
-    /* node connections */
-    ctx.setLineDash([4,7]); ctx.lineWidth=1;
-    for(let i=0;i<nodes.length;i++){
-      for(let j=i+1;j<nodes.length;j++){
-        const dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y;
-        const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<290){
-          ctx.globalAlpha=(1-d/290)*.3; ctx.strokeStyle=NEON;
-          ctx.beginPath(); ctx.moveTo(nodes[i].x,nodes[i].y);
-          ctx.lineTo(nodes[j].x,nodes[j].y); ctx.stroke();
-        }
-      }
-    }
     ctx.setLineDash([]); ctx.globalAlpha=1;
     requestAnimationFrame(draw);
   }
@@ -1287,7 +1203,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 </script>
 </body>
 </html>
-""", height=480, scrolling=False)
+""", height=460, scrolling=False)
 
 # ── UPLOAD ──
 st.markdown('<div class="upload-strip">', unsafe_allow_html=True)
