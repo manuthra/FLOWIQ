@@ -1273,7 +1273,7 @@ if is_valid_data and df is not None:
 
     st.markdown("<br>", unsafe_allow_html=True)
 
-    st.markdown('<div class="s-head"><span class="s-num">02</span><span class="s-name">Funnel Breakdown</span></div>', unsafe_allow_html=True)
+    st.markdown('<div class="s-head"><span class="s-num">02</span><span class="s-name">DROP-OFF ANALYSIS</span></div>', unsafe_allow_html=True)
 
     BG="#060914"; GRID="#1e2d45"; NEON="#00f5c4"; HOT="#ff3d6b"; MUT="#8892a4"; WHT="#f0f6ff"
 
