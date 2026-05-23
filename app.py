@@ -916,6 +916,33 @@ div[data-testid="stFileUploader"] button:hover {
 .fix-row:nth-child(4){animation-delay:.21s}
 
 .stSpinner > div { border-top-color: var(--neon) }
+            
+ /* ══ MOBILE RESPONSIVE ══ */
+@media (max-width: 768px) {
+  .topbar { padding: 0 16px; height: auto; min-height: 52px; gap: 6px; padding-top: 8px; padding-bottom: 8px; }
+  .tb-pills { display: none; }
+  .upload-strip { padding: 28px 20px; }
+  .dash { padding: 0 16px 48px; }
+  .mc { padding: 20px 16px 18px; }
+  .mc-val { font-size: 40px; }
+  .fix-row { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
+  .fix-step { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 8px; }
+  .fix-tags { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
+  .ins-main { padding: 24px 20px; }
+  .ins-body { font-size: 16px; }
+  .qw { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px; }
+  .qw-lbl { border-right: none; padding-right: 0; }
+  .s-name { font-size: 16px; letter-spacing: 2px; }
+  .empty { min-height: 40vh; }
+  .empty-h { font-size: 28px; }
+}
+@media (max-width: 480px) {
+  .tb-logo { font-size: 22px; letter-spacing: 3px; }
+  .tb-live { font-size: 9px; }
+  .upload-strip { padding: 20px 12px; }
+  .dash { padding: 0 12px 40px; }
+  .mc-val { font-size: 34px; }
+}           
 </style>
 """, unsafe_allow_html=True)
 
@@ -1134,6 +1161,14 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 @keyframes cur-blink{0%,100%{opacity:1}50%{opacity:0}}
 
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+                
+ @media (max-width: 768px) {
+  .hero { grid-template-columns: 1fr; height: auto; min-height: 420px; }
+  .hero-l { padding: 48px 24px 36px; border-right: none; border-bottom: 1px solid #1e2d45; }
+  .h1 { font-size: clamp(26px, 8vw, 42px); margin-bottom: 24px; }
+  .h-body { font-size: 15px; margin-bottom: 32px; }
+  .hero-r { display: none; }
+}               
 </style>
 </head>
 <body>
@@ -1308,7 +1343,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 </script>
 </body>
 </html>
-""", height=582, scrolling=False)
+""", height=820, scrolling=False)
 
 # ── UPLOAD ──
 st.markdown('<div class="upload-strip">', unsafe_allow_html=True)
