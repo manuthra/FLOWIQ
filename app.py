@@ -119,12 +119,15 @@ html, body, [class*="css"] {
 
 /* ══ HERO ══ */
 .hero {
-    display: grid;
-    grid-template-columns: 60% 40%;
-    min-height: 580px;
-    border-bottom: 1px solid var(--border);
-    position: relative;
-    overflow: hidden;
+  display: grid;
+  grid-template-columns: 60% 40%;
+  height: 580px;
+  ...
+}
+@media screen and (max-width: 600px) {
+  .hero { grid-template-columns: 1fr !important; height: auto !important; }
+  .hero-l { padding: 40px 20px !important; border-right: none !important; }
+  .hero-r { display: none !important; }
 }
 
 /* ── PARTICLE CANVAS ── */
@@ -772,6 +775,12 @@ div[data-testid="stFileUploader"] button:hover {
     transition: background 0.2s, border-color 0.2s;
     animation: up 0.5s ease both;
 }
+media screen and (max-width: 600px) {
+  .fix-row { grid-template-columns: 1fr !important; }
+  .fix-step { border-right: none !important; border-bottom: 1px solid var(--border); padding-bottom: 8px !important; }
+  .fix-tags { flex-direction: row !important; flex-wrap: wrap !important; }
+  .fix-action { font-size: 13px !important; }
+}            
 
 .fix-row:hover {
     background: var(--surface2);
