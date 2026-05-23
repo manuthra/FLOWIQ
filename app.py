@@ -119,8 +119,8 @@ html, body, [class*="css"] {
 
 /* ══ HERO ══ */
 .hero {
-    display: grid;
-    grid-template-columns: 60% 40%;
+    display: flex;
+    flex-direction: column;
     min-height: 580px;
     border-bottom: 1px solid var(--border);
     position: relative;
