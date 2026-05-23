@@ -1080,11 +1080,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 
 /* HERO RIGHT */
 .hero-r {
-  background:rgba(12,17,32,.88);
-  backdrop-filter:blur(2px);
-  padding:52px 44px;
-  display:flex;flex-direction:column;gap:0;
-  position:relative;overflow:hidden;z-index:10;
+  display:none;
 }
 .hero-r::before {
   content:'';position:absolute;inset:0;
