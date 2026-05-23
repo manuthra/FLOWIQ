@@ -1326,19 +1326,11 @@ if is_valid_data and df is not None:
 </div>""", unsafe_allow_html=True)
         st.markdown(f'<div class="qw"><span class="qw-lbl">⬤ Quick Win</span><span class="qw-text">{insights.get("quick_win","N/A")}</span></div>', unsafe_allow_html=True)
 
-    st.markdown('</div>', unsafe_allow_html=True)
-
-else:
-    st.markdown("""
-<div class="empty">
-  <div class="empty-ring"><div class="empty-inner">IQ</div></div>
-  <div class="empty-h">AWAITING DATA</div>
-  <div class="empty-p">Upload a CSV or enable sample dataset above</div>
-                
-
+          # ── PASTE THIS AFTER YOUR EXISTING DASHBOARD CODE ──
+# Replace your st.tabs() or add these as new sections inside the dash div
 
 # ─────────────────────────────────────────
-      COHORT ANALYSIS
+# SECTION 04 — COHORT ANALYSIS
 # ─────────────────────────────────────────
 st.markdown('<div class="s-head"><span class="s-num">04</span><span class="s-name">Cohort Analysis</span></div>', unsafe_allow_html=True)
 
@@ -1427,7 +1419,7 @@ st.markdown("<br>", unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────
-              REPORTS
+# SECTION 05 — REPORTS
 # ─────────────────────────────────────────
 st.markdown('<div class="s-head"><span class="s-num">05</span><span class="s-name">Reports</span></div>', unsafe_allow_html=True)
 
@@ -1528,13 +1520,22 @@ for i, step in enumerate(funnel):
     """, unsafe_allow_html=True)
 
 # Export button
-report_df = pd.DataFrame(funnel)
-csv_export = report_df.to_csv(index=False)
-st.markdown("<br>", unsafe_allow_html=True)
-st.download_button(
-    label="⬇  Export Report as CSV",
-    data=csv_export,
-    file_name="flowiq_report.csv",
-    mime="text/csv"
-)              
+    report_df = pd.DataFrame(funnel)
+    csv_export = report_df.to_csv(index=False)
+    st.markdown("<br>", unsafe_allow_html=True)
+    st.download_button(
+        label="⬇  Export Report as CSV",
+        data=csv_export,
+        file_name="flowiq_report.csv",
+        mime="text/csv"
+    )
+
+    st.markdown('</div>', unsafe_allow_html=True)
+
+else:
+    st.markdown("""
+<div class="empty">
+  <div class="empty-ring"><div class="empty-inner">IQ</div></div>
+  <div class="empty-h">AWAITING DATA</div>
+  <div class="empty-p">Upload a CSV or enable sample dataset above</div>
 </div>""", unsafe_allow_html=True)
