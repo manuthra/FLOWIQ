@@ -119,15 +119,12 @@ html, body, [class*="css"] {
 
 /* ══ HERO ══ */
 .hero {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  height: 580px;
-  ...
-}
-@media screen and (max-width: 600px) {
-  .hero { grid-template-columns: 1fr !important; height: auto !important; }
-  .hero-l { padding: 40px 20px !important; border-right: none !important; }
-  .hero-r { display: none !important; }
+    display: grid;
+    grid-template-columns: 60% 40%;
+    min-height: 580px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
 }
 
 /* ── PARTICLE CANVAS ── */
@@ -775,12 +772,6 @@ div[data-testid="stFileUploader"] button:hover {
     transition: background 0.2s, border-color 0.2s;
     animation: up 0.5s ease both;
 }
-media screen and (max-width: 600px) {
-  .fix-row { grid-template-columns: 1fr !important; }
-  .fix-step { border-right: none !important; border-bottom: 1px solid var(--border); padding-bottom: 8px !important; }
-  .fix-tags { flex-direction: row !important; flex-wrap: wrap !important; }
-  .fix-action { font-size: 13px !important; }
-}            
 
 .fix-row:hover {
     background: var(--surface2);
@@ -925,33 +916,6 @@ media screen and (max-width: 600px) {
 .fix-row:nth-child(4){animation-delay:.21s}
 
 .stSpinner > div { border-top-color: var(--neon) }
-            
- /* ══ MOBILE RESPONSIVE ══ */
-@media (max-width: 768px) {
-  .topbar { padding: 0 16px; height: auto; min-height: 52px; gap: 6px; padding-top: 8px; padding-bottom: 8px; }
-  .tb-pills { display: none; }
-  .upload-strip { padding: 28px 20px; }
-  .dash { padding: 0 16px 48px; }
-  .mc { padding: 20px 16px 18px; }
-  .mc-val { font-size: 40px; }
-  .fix-row { grid-template-columns: 1fr; gap: 10px; padding: 16px; }
-  .fix-step { border-right: none; border-bottom: 1px solid var(--border); padding-right: 0; padding-bottom: 8px; }
-  .fix-tags { flex-direction: row; flex-wrap: wrap; align-items: flex-start; }
-  .ins-main { padding: 24px 20px; }
-  .ins-body { font-size: 16px; }
-  .qw { flex-direction: column; align-items: flex-start; gap: 8px; padding: 16px; }
-  .qw-lbl { border-right: none; padding-right: 0; }
-  .s-name { font-size: 16px; letter-spacing: 2px; }
-  .empty { min-height: 40vh; }
-  .empty-h { font-size: 28px; }
-}
-@media (max-width: 480px) {
-  .tb-logo { font-size: 22px; letter-spacing: 3px; }
-  .tb-live { font-size: 9px; }
-  .upload-strip { padding: 20px 12px; }
-  .dash { padding: 0 12px 40px; }
-  .mc-val { font-size: 34px; }
-}           
 </style>
 """, unsafe_allow_html=True)
 
@@ -982,14 +946,17 @@ components.html("""
 body{margin:0;padding:0;background:#060914;overflow:hidden;}
 
 .hero {
-  display: grid;
-  grid-template-columns: 60% 40%;
-  height: 580px;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  min-height: 420px;             
   border-bottom: 1px solid #1e2d45;
   position: relative;
   overflow: hidden;
   font-family: 'Plus Jakarta Sans', sans-serif;
 }
+.hero-r { display: none; }
+.hero-l { padding: 40px 24px; border-right: none; }                
 
 #hero-canvas {
   position: absolute;
@@ -1170,14 +1137,6 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 @keyframes cur-blink{0%,100%{opacity:1}50%{opacity:0}}
 
 @keyframes up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-                
- @media (max-width: 768px) {
-  .hero { grid-template-columns: 1fr; height: auto; min-height: 420px; }
-  .hero-l { padding: 48px 24px 36px; border-right: none; border-bottom: 1px solid #1e2d45; }
-  .h1 { font-size: clamp(26px, 8vw, 42px); margin-bottom: 24px; }
-  .h-body { font-size: 15px; margin-bottom: 32px; }
-  .hero-r { display: none; }
-}               
 </style>
 </head>
 <body>
@@ -1352,7 +1311,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 </script>
 </body>
 </html>
-""", height=820, scrolling=False)
+""", height=582, scrolling=False)
 
 # ── UPLOAD ──
 st.markdown('<div class="upload-strip">', unsafe_allow_html=True)
@@ -1465,10 +1424,13 @@ if is_valid_data and df is not None:
             impact=str(fix.get('impact','low')).lower().split()[0]
             effort=str(fix.get('effort','low')).lower().split()[0]
             st.markdown(f"""
-<div class="fix-row">
-  <div class="fix-step">{fix.get('step','Step')}</div>
+<div class="fix-row" style="display:flex; flex-direction:column; gap:10px;">
+  <div class="fix-step" style="border-right:none; border-bottom:1px solid #1e2d45; padding-bottom:8px;">{fix.get('step','Step')}</div>
   <div><div class="fix-issue">{fix.get('issue','')}</div><div class="fix-action">{fix.get('fix','')}</div></div>
-  <div class="fix-tags"><span class="ftag {impact}">Impact: {fix.get('impact','Low')}</span><span class="ftag {effort}">Effort: {fix.get('effort','Low')}</span></div>
+  <div class="fix-tags" style="flex-direction:row; flex-wrap:wrap; align-items:flex-start;">
+    <span class="ftag {impact}">Impact: {fix.get('impact','Low')}</span>
+    <span class="ftag {effort}">Effort: {fix.get('effort','Low')}</span>
+  </div>
 </div>""", unsafe_allow_html=True)
         st.markdown(f'<div class="qw"><span class="qw-lbl">⬤ Quick Win</span><span class="qw-text">{insights.get("quick_win","N/A")}</span></div>', unsafe_allow_html=True)
 
