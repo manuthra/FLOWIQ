@@ -253,16 +253,6 @@ html, body, [class*="css"] {
     border-bottom: 1.5px solid rgba(0,245,196,0.5);
     border-right: 1.5px solid rgba(0,245,196,0.5); }
 
-.hero-l {
-    padding: 80px 64px 72px;
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    z-index: 10;
-}
 
 /* moving neon glow behind text */
 .hero-l::before {
@@ -374,7 +364,7 @@ html, body, [class*="css"] {
     font-weight: 400;
     line-height: 1.8;
     color: var(--muted);
-    max-width: 460px;
+    max-width: 100%;
     margin-bottom: 52px;
     position: relative;
     opacity: 0;
@@ -407,18 +397,8 @@ html, body, [class*="css"] {
     letter-spacing: 2px;
 }
 
-/* ── HERO RIGHT ── */
-.hero-r {
-    background: rgba(12,17,32,0.85);
-    backdrop-filter: blur(2px);
-    padding: 52px 44px;
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    position: relative;
-    overflow: hidden;
-    z-index: 10;
-}
+
+
 
 /* grid bg */
 .hero-r::before {
@@ -1311,7 +1291,7 @@ body{margin:0;padding:0;background:#060914;overflow:hidden;}
 </script>
 </body>
 </html>
-""", height=582, scrolling=False)
+""", height=480, scrolling=False)
 
 # ── UPLOAD ──
 st.markdown('<div class="upload-strip">', unsafe_allow_html=True)
